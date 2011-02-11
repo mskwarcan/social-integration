@@ -30,5 +30,5 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 
-gem 'twitter'
+gem 'twitter_oauth'
 gem 'linkedin'

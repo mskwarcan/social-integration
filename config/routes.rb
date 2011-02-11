@@ -1,7 +1,12 @@
 Social::Application.routes.draw do
+  resources :users
+
   root :to => "home#index"
   
   get "home/index"
+  get "home/register"
+  
+  match 'users/authenticate' => 'users#authenticate'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
