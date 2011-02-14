@@ -81,6 +81,11 @@ class UsersController < ApplicationController
     end
   end
   
+  def logout
+    session[:user] = nil
+    redirect_to ("home/index")
+  end
+  
   def authenticate
     @user = User.first(:conditions => {:username => params[:username], :password => params[:password]})
     
