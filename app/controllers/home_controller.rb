@@ -41,6 +41,8 @@ class HomeController < ApplicationController
     :consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY'
     )
     
+    request_token = client.request_token( :oauth_callback => 'http://socialintegration.heroku.com/twitter_oauth' )
+    
      access_token = client.authorize(
        request_token.token,
        request_token.secret,
