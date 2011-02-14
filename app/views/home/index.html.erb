@@ -12,7 +12,17 @@
  Hello	<%= session[:user].name %>!
 
 <p>Register Your account on Twitter!</p>
+
+<% if @user.twitter_authd?(@user) %>
+  <% client = Twitter::Client.new %>
+	<% tweets = client.home_timeline.first.text %>
+	<% tweets.each do |tweet | %>
+		<%= tweet %><br />
+	<% end %>
+  
+<% else %>
 <form id="twitter" action="/home/register">
 	<input type="submit" value="Register">
 </form>
+<% end %>
 <% end %>

@@ -31,4 +31,5 @@ gem 'sqlite3'
 # end
 
 gem 'twitter_oauth'
+gem 'twitter'
 gem 'linkedin'
