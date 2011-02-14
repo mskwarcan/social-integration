@@ -15,6 +15,7 @@
 
 
 <% client = Tweet.client(@user) %>
+<%= client.info["name"] %>
 
 <form id="twitter" action="/register">
 	<input type="submit" value="Register">

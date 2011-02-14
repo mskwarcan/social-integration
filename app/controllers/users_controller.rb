@@ -95,6 +95,8 @@ class UsersController < ApplicationController
         format.html { redirect_to("/home/index") }
         format.xml  { head :ok }
       end
+    else
+      flash[:notice] = "Incorrect Password"
     end
   end
 end
