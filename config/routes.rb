@@ -8,7 +8,7 @@ Social::Application.routes.draw do
   
   match 'users/authenticate' => 'users#authenticate'
   
-  map.twitter_oauth '/twitter_oauth', :controller => 'home', :action => 'twitter_oauth'
+  match '/twitter_oauth', :controller => 'home', :action => 'twitter_oauth'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
