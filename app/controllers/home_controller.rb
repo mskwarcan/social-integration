@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     
     unless @user.twitter_authd?(@user)
       puts "Client not authorized"
-      request_token = client.request_token( :oauth_callback => 'http%3A%2F%2Fsocialintegration.heroku.com%2F/twitter_oauth' )
+      request_token = client.request_token( :oauth_callback => 'http%3A%2F%2Fsocialintegration.heroku.com%2Ftwitter_oauth' )
       puts "Get Tokens"
       @user.twitter_token = request_token.token
       puts request_token.token
@@ -36,6 +36,7 @@ class HomeController < ApplicationController
   end
   
   def twitter_oauth
+     puts "callback"
      client = TwitterOAuth::Client.new(
      :consumer_key => '4xm5KPQDlTw3RlQKQuO8qQ',
      :consumer_secret => 'AKvzYoI8WERZghSmK9J3jeY9YnCmcevWGBvdyK5A',
