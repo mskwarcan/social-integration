@@ -12,8 +12,8 @@ class HomeController < ApplicationController
     puts "User created"
     
     client = TwitterOAuth::Client.new(
-    :consumer_key => '4xm5KPQDlTw3RlQKQuO8qQ',
-    :consumer_secret => 'AKvzYoI8WERZghSmK9J3jeY9YnCmcevWGBvdyK5A',
+    :consumer_key => 'AsAuRyGZP73Pr6863VS4Pg',
+    :consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY',
     :token => @user.twitter_token,
     :secret => @user.twitter_secret
     )
