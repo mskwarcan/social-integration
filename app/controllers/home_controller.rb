@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     
     client = Tweet.client(@user)
     
-    request_token = client.request_token( :oauth_callback => 'http%3A%2F%2Fsocialintegration.heroku.com%2Ftwitter_oauth' )
+    request_token = client.request_token( :oauth_callback => 'http://socialintegration.heroku.com/twitter_oauth' )
     @user.twitter_token = request_token.token
     @user.twitter_secret = request_token.secret
     @user.save(false)
@@ -45,7 +45,6 @@ class HomeController < ApplicationController
      @user.twitter_token = access_token.token
      @user.twitter_secret = access_token.secret
      @user.save(false)
-     puts "redirect to home"
      
      redirect_to "/"
    end

@@ -13,15 +13,11 @@
 
 <p>Register Your account on Twitter!</p>
 
-<% if @user.twitter_authd?(@user) %>
-  <% client = Tweet.client(@user) %>
-	<% search = Twitter::Search.new %>
-	<%= client.public_timeline %>
 
-  
+<% client = Tweet.client(@user) %>
 
 <form id="twitter" action="/register">
 	<input type="submit" value="Register">
 </form>
-<% end %>
+
 <% end %>
