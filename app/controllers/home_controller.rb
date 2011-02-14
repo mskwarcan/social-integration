@@ -36,6 +36,11 @@ class HomeController < ApplicationController
   def twitter_oauth
     @user = session[:user]
     
+    client = TwitterOAuth::Client.new(
+    :consumer_key => 'AsAuRyGZP73Pr6863VS4Pg',
+    :consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY'
+    )
+    
      access_token = client.authorize(
        request_token.token,
        request_token.secret,
