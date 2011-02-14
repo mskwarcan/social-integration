@@ -7,6 +7,13 @@ class HomeController < ApplicationController
     @user = session[:user]
     
     if session[:user]
+      client = Tweet.client(@user)
+      
+      request_token = client.request_token( :oauth_callback => 'http%3A%2F%2Fsocialintegration.heroku.com%2Ftwitter_oauth' )
+      @user.twitter_token = request_token.token
+      @user.twitter_secret = request_token.secret
+      @user.save(false)
+      
       Twitter.configure do |config|
         config.consumer_key = 'AsAuRyGZP73Pr6863VS4Pg'
         config.consumer_secret = '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY'
