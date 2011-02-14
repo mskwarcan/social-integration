@@ -45,6 +45,7 @@ class HomeController < ApplicationController
      @user.twitter_token = access_token.token
      @user.twitter_secret = access_token.secret
      @user.save(false)
+     puts "redirect to home"
      
      redirect_to "/"
    end
