@@ -8,7 +8,7 @@ Social::Application.routes.draw do
   
   match 'users/authenticate' => 'users#authenticate'
   
-  match 'users/logout' => 'users#logout'
+  match 'logout', :controller => 'users', :action => 'logout'
   
   match '/twitter_oauth', :controller => 'home', :action => 'twitter_oauth'
 

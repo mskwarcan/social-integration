@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   
   def logout
     session[:user] = nil
-    redirect_to ("home/index")
+    redirect_to ("/home/index")
   end
   
   def authenticate
