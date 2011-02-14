@@ -23,7 +23,7 @@ class HomeController < ApplicationController
   def register
     @user = session[:user]
     
-    TwitterOAuth::Client.new(
+    client = TwitterOAuth::Client.new(
     :consumer_key => 'AsAuRyGZP73Pr6863VS4Pg',
     :consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY'
     )
