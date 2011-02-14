@@ -34,6 +34,7 @@ class HomeController < ApplicationController
   end
   
   def twitter_oauth
+     @user = session[:user]
      client = Tweet.client(@user)
      
      access_token = client.authorize(
