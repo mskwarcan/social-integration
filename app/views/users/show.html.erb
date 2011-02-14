@@ -25,6 +25,13 @@
   <%= @user.twitter_secret %>
 </p>
 
+<% client = TwitterOAuth::Client.new(
+:consumer_key => 'AsAuRyGZP73Pr6863VS4Pg',
+:consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY',
+:token => @user.twitter_token,
+:secret => @user.twitter_secret
+)%>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
