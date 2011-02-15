@@ -14,9 +14,9 @@
 <% if @user.twitter_authd?(@user) %>
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %>
-	<%= client.info["profile_image_url"] %>
+	<img src="<%= client.info["profile_image_url"] %>" />
 	<%= client.info %>
-	<%= client.public_timeline %>
+	<%= client.get_latest(@user) %>
 
 <% else %>
 	<p>Register Your account on Twitter!</p>
