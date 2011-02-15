@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   def linkedin_register
     client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47')
     
-    request_token = client.request_token(:oauth_callback => "http://#{request.host_with_port}/auth/callback")
+    request_token = client.request_token(:oauth_callback => "http://socialintegration.heroku.com/linkedin_oauth'")
     @user.linkedin_token = request_token.token
     @user.linkedin_secret = request_token.secret
     @user.save
