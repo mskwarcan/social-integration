@@ -13,17 +13,10 @@
 
 <% if @user.twitter_authd?(@user) %>
 	<% client = Tweet.client(@user) %>
-	<%= client.info["name"] %>
-	<img src="<%= client.info["profile_image_url"] %>" />
-<% tweets = client.statuses.user_timeline? %>
-
-<% tweets.each do |t|%>
-  <% created = DateTime.parse(t.created_at)%>
-  <% # create the tweet if it doesn't already exist%>
-  <% unless Tweet.exists?(["created=?", created])%>
-    <% Tweet.create({:content => t.text, :created => created })%>
-   <% end%>
-<% end %>
+	<%= client.info["name"] %><br />
+	<img src="<%= client.info["profile_image_url"] %>" /><br />
+  <%= client.home_timeline.first.text %><br />
+  <%= client.friends.sort{|a, b| a.followers_count <=> b.followers_count}.reverse.first.name %>
 
 <% else %>
 	<p>Register Your account on Twitter!</p>
