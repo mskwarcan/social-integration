@@ -59,7 +59,10 @@
   )%>
 
 <h3>Facebook Profile</h3>
-<%= facebook_client.me.name %><br />
+<%= facebook_client.me.info['name'] %><br />
+<%= facebook_client.me.info['link'] %><br />
+
+<%= facebook_client.me.info['about'] %><br />
 
 <% else %>
 	<p>Register Your account on Facebook!</p>
