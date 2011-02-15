@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
   MY_APPLICATION_NAME = "Social Integretion"
   
   """Connect to the Twitter API and pull down the latest tweets"""
-  def self.get_latest
+  def self.get_latest(client)
     tweets = client.statuses.user_timeline? :screen_name => MY_APPLICATION_NAME # hit the API
     tweets.each do |t|
       created = DateTime.parse(t.created_at)

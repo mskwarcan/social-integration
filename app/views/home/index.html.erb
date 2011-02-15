@@ -16,7 +16,7 @@
 	<%= client.info["name"] %>
 	<img src="<%= client.info["profile_image_url"] %>" />
 	<%= client.info %>
-	<%= client.get_latest(@user) %>
+	<%= Tweet.get_latest(client) %>
 
 <% else %>
 	<p>Register Your account on Twitter!</p>
