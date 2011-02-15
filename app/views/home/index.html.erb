@@ -11,9 +11,7 @@
 <% if session[:user] %>
  Hello	<%= session[:user].name %>!
 
-<p>Register Your account on Twitter!</p>
-
-<% unless @user.twitter_authd?(@user) %>
+<% if @user.twitter_authd?(@user) %>
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %>
 	<%= client.info["profile_image_url"] %>
@@ -21,6 +19,7 @@
 	<%= client.public_timeline %>
 
 <% else %>
+	<p>Register Your account on Twitter!</p>
 	<form id="twitter" action="/register">
 		<input type="submit" value="Register">
 	</form>
