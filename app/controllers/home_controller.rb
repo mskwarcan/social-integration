@@ -1,28 +1,40 @@
 class HomeController < ApplicationController
   require "rubygems"
   require 'twitter_oauth'
+  require 'linkedin'
   require 'twitter'
   
   def index
     @user = session[:user]
+  end
+  
+  def linkedin_register
+    client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47')
     
-    if session[:user]
-      client = Tweet.client(@user) 
-      
-      unless @user.twitter_authd?(@user)
-        request_token = client.request_token( :oauth_callback => 'http%3A%2F%2Fsocialintegration.heroku.com%2Ftwitter_oauth' )
-        @user.twitter_token = request_token.token
-        @user.twitter_secret = request_token.secret
-        @user.save(false)
-        redirect_to request_token.authorize_url
-      end
-    end
+    request_token = client.request_token(:oauth_callback => "http://#{request.host_with_port}/auth/callback")
+    @user.linkedin_token = request_token.token
+    @user.linkedin_secret = request_token.secret
+    @user.save
     
+    redirect_to client.request_token.authorize_url
+  end
+  
+  def linkedin_oauth
+    client = LinkedIn::Client.new("wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P", "uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47")
+    pin = params[:oauth_verifier]
+    atoken, asecret = client.authorize_from_request(@user.linkedin_token, @user.linkedin_secret, pin)
+    @user.linkedin_token = atoken
+    @user.linkedin_secret = asecret
+    @user.save
+    
+    redirect_to "/"
   end
   
   def register
+    #Get user
     @user = session[:user]
     
+    #Set client up
     client = TwitterOAuth::Client.new(
     :consumer_key => 'AsAuRyGZP73Pr6863VS4Pg',
     :consumer_secret => '2bNk5FCvT39HzFN8eHPdbpFNKkaJHnxpQkZ6xz17sY'
@@ -33,7 +45,6 @@ class HomeController < ApplicationController
     @user.twitter_secret = request_token.secret
     @user.save
     redirect_to request_token.authorize_url
-    
   end
   
   def twitter_oauth

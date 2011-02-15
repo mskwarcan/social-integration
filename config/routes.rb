@@ -6,10 +6,12 @@ Social::Application.routes.draw do
   get "home/index"
   
   match 'users/authenticate' => 'users#authenticate'
-  
+
   match 'logout', :controller => 'users', :action => 'logout'
   match '/register', :controller => 'home', :action => 'register'
+  match '/linkedin_register', :controller => 'home', :action => 'linkedin_register'
   match '/twitter_post', :controller => 'home', :action => 'twitter_post'
+  match '/linkedin_oauth', :controller => 'home', :action => 'linkedin_oauth'
   match '/twitter_oauth', :controller => 'home', :action => 'twitter_oauth'
 
   # The priority is based upon order of creation:

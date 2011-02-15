@@ -12,4 +12,11 @@ class User < ActiveRecord::Base
       return true
     end
   end
+  
+  def linkedin_authd?(user)
+    @user = User.first(:conditions => {:username => user.username})
+    if @user.linkedin_token
+      return true
+    end
+  end
 end

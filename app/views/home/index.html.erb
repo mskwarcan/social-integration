@@ -9,7 +9,7 @@
 </form>
 
 <% if session[:user] %>
- Hello	<%= session[:user].name %>!
+ Hello	<%= session[:user].name %>!<br />
 
 <% if @user.twitter_authd?(@user) %>
 	<% client = Tweet.client(@user) %>
@@ -27,6 +27,20 @@
 <% else %>
 	<p>Register Your account on Twitter!</p>
 	<form id="twitter" action="/register">
+		<input type="submit" value="Register">
+	</form>
+<% end %>
+
+<% if @user.linkedin_authd?(@user) %>
+	<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
+  <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
+
+	<%= linkedin_client.profile %>
+	<%= linkedin_client.connections %>
+
+<% else %>
+	<p>Register Your account on LinkedIn!</p>
+	<form id="twitter" action="/linkedin_register">
 		<input type="submit" value="Register">
 	</form>
 <% end %>

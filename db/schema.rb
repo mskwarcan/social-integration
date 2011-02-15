@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214200438) do
+ActiveRecord::Schema.define(:version => 20110215163023) do
 
   create_table "sessions", :force => true do |t|
     t.string    "session_id", :null => false
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20110214200438) do
     t.string    "twitter_secret"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string    "linkedin_token"
+    t.string    "linkedin_secret"
   end
 
 end
