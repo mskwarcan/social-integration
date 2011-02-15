@@ -12,6 +12,7 @@
  Hello	<%= session[:user].name %>!<br />
 
 <% if @user.twitter_authd?(@user) %>
+<h3>Your Twitter</h3>
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %><br />
 	<img src="<%= client.info["profile_image_url"] %>" /><br /><br />
@@ -34,9 +35,13 @@
 <% if @user.linkedin_authd?(@user) %>
 	<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
   <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
-
+  
+  <h3>Linked In Profile</h3>
 	<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
-	<%= linkedin_client.profile.location %><br />
+	<%= linkedin_client.profile.current-status %><br />
+	<%= linkedin_client.profile.industry %><br />
+	
+	<%= linkedin_client.profile.summary %><br />
 	Connections: <%= linkedin_client.connections.count %>
 
 <% else %>
