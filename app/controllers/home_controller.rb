@@ -31,6 +31,7 @@ class HomeController < ApplicationController
     
     access_token = client.authorize(:code => params[:code])
     @user.facebook_access = access_token.token
+    @user.facebook_authenticated = true
     @user.save
     
     redirect_to "/"
@@ -57,6 +58,7 @@ class HomeController < ApplicationController
     atoken, asecret = client.authorize_from_request(@user.linkedin_token, @user.linkedin_secret, pin)
     @user.linkedin_token = atoken
     @user.linkedin_secret = asecret
+    @user.linkedin_authenticated = true
     @user.save
     
     redirect_to "/"
@@ -96,7 +98,8 @@ class HomeController < ApplicationController
      
      @user.twitter_token = access_token.token
      @user.twitter_secret = access_token.secret
-     @user.save(false)
+     @user.twitter_authenticated = true
+     @user.save
      
      redirect_to "/"
    end

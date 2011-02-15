@@ -8,21 +8,21 @@ class User < ActiveRecord::Base
   
   def twitter_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.twitter_token
+    if @user.twitter_authenticated == true
       return true
     end
   end
   
   def linkedin_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.linkedin_token
+    if @user.linkedin_authenticated == true
       return true
     end
   end
   
   def facebook_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.facebook_access
+    if @user.facebook_authenticated == true
       return true
     end
   end
