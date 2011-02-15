@@ -29,8 +29,9 @@ class HomeController < ApplicationController
     )
     
     request_token = client.request_token( :oauth_callback => 'http://socialintegration.heroku.com/twitter_oauth' )
-    puts request_token.token
-    puts request_token.secret
+    @user.twitter_token = request_token.token
+    @user.twitter_secret = request_token.secret
+    @user.save
     redirect_to request_token.authorize_url
     
   end
@@ -45,12 +46,10 @@ class HomeController < ApplicationController
     )
     
      access_token = client.authorize(
-       request_token.token,
-       request_token.secret,
+       @user.twitter_token,
+       @user.twitter_secret,
        :oauth_verifier => params[:oauth_verifier]
      )
-     
-     puts access_token
      
      @user.twitter_token = access_token.token
      @user.twitter_secret = access_token.secret
