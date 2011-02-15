@@ -19,4 +19,11 @@ class User < ActiveRecord::Base
       return true
     end
   end
+  
+  def facebook_authd?(user)
+    @user = User.first(:conditions => {:username => user.username})
+    if @user.facebook_token
+      return true
+    end
+  end
 end
