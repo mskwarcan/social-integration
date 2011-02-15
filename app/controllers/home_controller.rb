@@ -25,7 +25,8 @@ class HomeController < ApplicationController
     
     client = FacebookOAuth::Client.new(
         :application_id => '129898603745111',
-        :application_secret => 'f4a68ca5d87865292897f00b69e8f299'
+        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+        :callback => 'http://socialintegration.heroku.com/facebook_oauth'
     )
     
     access_token = client.authorize(:code => params[:code])
