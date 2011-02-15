@@ -9,9 +9,11 @@ class HomeController < ApplicationController
   end
   
   def linkedin_register
+    @user = session[:user]
+    
     client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47')
     
-    request_token = client.request_token(:oauth_callback => "http://socialintegration.heroku.com/linkedin_oauth'")
+    request_token = client.request_token(:oauth_callback => "http://socialintegration.heroku.com/linkedin_oauth")
     @user.linkedin_token = request_token.token
     @user.linkedin_secret = request_token.secret
     @user.save
@@ -20,6 +22,8 @@ class HomeController < ApplicationController
   end
   
   def linkedin_oauth
+    @user = session[:user]
+    
     client = LinkedIn::Client.new("wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P", "uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47")
     pin = params[:oauth_verifier]
     atoken, asecret = client.authorize_from_request(@user.linkedin_token, @user.linkedin_secret, pin)
