@@ -15,7 +15,6 @@
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %>
 	<img src="<%= client.info["profile_image_url"] %>" />
-	<%= client.status %>
 
 <% else %>
 	<p>Register Your account on Twitter!</p>
