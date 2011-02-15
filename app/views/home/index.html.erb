@@ -35,8 +35,9 @@
 	<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
   <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
 
-	<%= linkedin_client.profile %>
-	<%= linkedin_client.connections %>
+	<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
+	<%= linkedin_client.profile.location %><br />
+	Connections: <%= linkedin_client.connections.count %>
 
 <% else %>
 	<p>Register Your account on LinkedIn!</p>
