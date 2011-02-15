@@ -14,11 +14,10 @@
 <% if @user.twitter_authd?(@user) %>
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %><br />
-	<img src="<%= client.info["profile_image_url"] %>" /><br />
-  <% tweets = Twitter.user_timeline(client) %>
-	<% tweets.each do |tweet |%>
-		<%= tweet.first.text %><br />
-	<% end %>
+	<img src="<%= client.info["profile_image_url"] %>" /><br /><br />
+  <%= Twitter.user_timeline(client.info["screen_name"]).first.text %><br />
+<%= Twitter.user_timeline(client.info["screen_name"]).second.text %><br />
+<%= Twitter.user_timeline(client.info["screen_name"]).third.text %><br />
 
 
 <% else %>
