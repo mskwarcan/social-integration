@@ -9,6 +9,7 @@ Social::Application.routes.draw do
   
   match 'logout', :controller => 'users', :action => 'logout'
   match '/register', :controller => 'home', :action => 'register'
+  match '/twitter_post', :controller => 'home', :action => 'twitter_post'
   match '/twitter_oauth', :controller => 'home', :action => 'twitter_oauth'
 
   # The priority is based upon order of creation:

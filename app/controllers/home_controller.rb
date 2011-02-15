@@ -57,5 +57,16 @@ class HomeController < ApplicationController
      
      redirect_to "/"
    end
+   
+   def twitter_post
+     @user = session[:user]
+     
+     client = Tweet.client(@user) 
+     
+     flash[:notice] = "Your post was successful"
+     client.update(params[:twitter_post]) # sends a twitter status update
+     
+     redirect_to "/"
+   end
 
 end

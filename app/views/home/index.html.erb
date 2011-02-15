@@ -15,10 +15,14 @@
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %><br />
 	<img src="<%= client.info["profile_image_url"] %>" /><br /><br />
-  <%= Twitter.user_timeline(client.info["screen_name"]).first.text %><br />
+<%= Twitter.user_timeline(client.info["screen_name"]).first.text %><br />
 <%= Twitter.user_timeline(client.info["screen_name"]).second.text %><br />
 <%= Twitter.user_timeline(client.info["screen_name"]).third.text %><br />
 
+<form id="twitter" action="/twitter_post">
+	<textarea name="twitter_post" maxlength="140"></textarea>
+	<input type="submit" value="Post">
+</form>
 
 <% else %>
 	<p>Register Your account on Twitter!</p>
