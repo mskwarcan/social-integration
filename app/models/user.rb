@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   
   def facebook_authd?(user)
     @user = User.first(:conditions => {:username => user.username})
-    if @user.facebook_token
+    if @user.facebook_access
       return true
     end
   end
