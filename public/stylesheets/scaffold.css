@@ -1,9 +1,25 @@
-body { background-color: #fff; color: #333; }
+body 
+{ 
+  background:url('/images/social_bg.jpg');
+  color: #817460;
+  margin:0;
+  padding:0;
+}
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+}
+
+h1, h2, h3, h4
+{
+  font-family: "lemonde-sans-1","lemonde-sans-2",sans-serif;
+}
+
+h3
+{
+  font-size:24px;
 }
 
 pre {
@@ -53,4 +69,63 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+/* Main Styles */
+
+#wrapper
+{
+  width:940px;
+  padding:18px 10px;
+  margin:0 auto;
+}
+
+.col1
+{
+  width:300px;
+  margin-right:20px;
+}
+
+.col2
+{
+  width:300px;
+  margin-right:20px;
+}
+
+.col3
+{
+  width:300px;
+}
+
+h1.quinect
+{
+  background:url('/images/quinect.png');
+  width:300px;
+  height:84px;
+  text-indent:-9998px;
+  margin:0;
+}
+
+.login
+{
+  background:url('/images/white_bg.png');
+  padding:20px 30px;
+}
+
+.login h3
+{
+  margin:0 0 5px;
+}
+
+.login input
+{
+  background:#faf4e7;
+  border:1px #cdbda6 solid;
+  -moz-border-radius:7px;
+  border-radius:7px;
+  font-size:14px;
+  color:#a89271;
+  height:35px;
+  font-family:Georgia,serif;
+  width:230px;
 }

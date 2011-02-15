@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   require "rubygems"
   require 'twitter_oauth'
   require 'linkedin'
+  require 'facebook_oauth'
   require 'twitter'
   
   def index

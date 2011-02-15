@@ -1,13 +1,16 @@
-<h1>Welcome</h1>
-<p>Login:</p>
-<form id="login" method="post" action="/users/authenticate">
-	<label for="username">Username:</label>
-	<input name="username" type="text" /><br />
-	<label for="password">Password:</label>
-	<input name="password" type="password" />
-	<input type="submit" />
-</form>
-
+<h1 class="quinect">Quinect.me Connecting Quickly</h1>
+<div class="col1">
+	<div class="login">
+		<h3>Login</h3>
+		<form id="login" method="post" action="/users/authenticate">
+			<label for="username">Username:</label>
+			<input name="username" type="text" /><br />
+			<label for="password">Password:</label>
+			<input name="password" type="password" />
+			<input type="submit" />
+		</form>
+	</div>
+</div>
 <% if session[:user] %>
  Hello	<%= session[:user].name %>!<br />
 
