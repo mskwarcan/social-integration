@@ -15,7 +15,7 @@
 	<% client = Tweet.client(@user) %>
 	<%= client.info["name"] %><br />
 	<img src="<%= client.info["profile_image_url"] %>" /><br />
-  <%= client.home_timeline.first.text %><br />
+  <%= client.home_timeline.first %><br />
   <%= client.friends.sort{|a, b| a.followers_count <=> b.followers_count}.reverse.first.name %>
 
 <% else %>
