@@ -13,12 +13,17 @@
 
 <p>Register Your account on Twitter!</p>
 
+<% unless @user.twitter_authd?(@user) %>
+	<% client = Tweet.client(@user) %>
+	<%= client.info["name"] %>
+	<%= client.info["profile_image_url"] %>
+	<%= client.info %>
+	<%= client.public_timeline %>
 
-<% client = Tweet.client(@user) %>
-<%= client.info["name"] %>
-
-<form id="twitter" action="/register">
-	<input type="submit" value="Register">
-</form>
+<% else %>
+	<form id="twitter" action="/register">
+		<input type="submit" value="Register">
+	</form>
+<% end %>
 
 <% end %>
