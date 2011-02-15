@@ -34,6 +34,10 @@ GEM
     crack (0.1.8)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    facebook_oauth (0.2.2)
+      json (>= 1.1.9)
+      mime-types (>= 1.16)
+      oauth2 (>= 0.0.8)
     faraday (0.5.5)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -59,6 +63,9 @@ GEM
     nokogiri (1.4.4)
     oauth (0.3.6)
       ruby-hmac (>= 0.3.1)
+    oauth2 (0.1.1)
+      faraday (~> 0.5.0)
+      multi_json (~> 0.0.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -105,6 +112,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  facebook_oauth
   linkedin
   rails (= 3.0.4)
   sqlite3
