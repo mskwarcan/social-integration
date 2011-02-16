@@ -2,80 +2,81 @@
 <div class="col1">
 	<h1 class="quinect">Quinect.me Connecting Quickly</h1>
 	<% if session[:user] %>
-	
+		<% if @user.twitter_authd?(@user) %>
+		<h3>Your Twitter</h3>
+			<% client = Tweet.client(@user) %>
+			<%= client.info["name"] %><br />
+			<img src="<%= client.info["profile_image_url"] %>" /><br /><br />
+		<%= Twitter.user_timeline(client.info["screen_name"]).first.text %><br />
+		<%= Twitter.user_timeline(client.info["screen_name"]).second.text %><br />
+		<%= Twitter.user_timeline(client.info["screen_name"]).third.text %><br />
+
+		<form id="twitter" action="/twitter_post">
+			<textarea name="twitter_post" maxlength="140"></textarea>
+			<input type="submit" value="Post">
+		</form>
+
+		<% else %>
+			<img src="/images/twitter.jpg" />
+			<h3>Register Your account on Twitter!</h3>
+			<form id="twitter" action="/register">
+				<input type="submit" class="submit" value="Register on Twitter">
+			</form>
+		<% end %>
 	<% else %>
 		<%= render :partial => "/shared/login" %>
 	<% end %>
 </div>
 <div class="col2">
-	<%= render :partial => "/shared/news" %>
+	<% if session[:user] %>
+		<% if @user.facebook_authd?(@user) %>
+			<% facebook_client = FacebookOAuth::Client.new(
+		      :application_id => '129898603745111',
+		      :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+		      :token => @user.facebook_access
+		  )%>
+
+		<h3>Facebook Profile</h3>
+		<%= facebook_client.me.info['name'] %><br />
+		<%= facebook_client.me.info['link'] %><br />
+
+		<%= facebook_client.me.info['about'] %><br />
+
+		<% else %>
+			<img src="/images/facebook.jpg" />
+			<h2>Register Your account on Facebook!</h2>
+			<form id="twitter" action="/facebook_register">
+				<input type="submit" class="submit" value="Register on Facebook">
+			</form>
+		<% end %>
+		
+	<% else %>
+		<%= render :partial => "/shared/news" %>
+	<% end %>
 </div>
 
 <div class="col3">
-	<%= render :partial => "/shared/images" %>
+	<% if session[:user] %>
+		<% if @user.linkedin_authd?(@user) %>
+			<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
+		  <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
+
+		  <h3>Linked In Profile</h3>
+			<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
+			<%= linkedin_client.profile.headline %><br />
+			<%= linkedin_client.profile.industry %><br />
+
+			<%= linkedin_client.profile.summary %><br />
+			Connections: <%= linkedin_client.connections.count %>
+
+		<% else %>
+			<img src="/images/linkedin.jpg" />
+			<h2>Register Your account on LinkedIn!</h2>
+			<form id="twitter" action="/linkedin_register">
+				<input type="submit" value="Register on Linked In">
+			</form>
+		<% end %>
+	<% else %>
+		<%= render :partial => "/shared/images" %>
+	<% end %>
 </div>
-
-<% if session[:user] %>
- Hello	<%= session[:user].name %>!<br />
-
-<% if @user.twitter_authd?(@user) %>
-<h3>Your Twitter</h3>
-	<% client = Tweet.client(@user) %>
-	<%= client.info["name"] %><br />
-	<img src="<%= client.info["profile_image_url"] %>" /><br /><br />
-<%= Twitter.user_timeline(client.info["screen_name"]).first.text %><br />
-<%= Twitter.user_timeline(client.info["screen_name"]).second.text %><br />
-<%= Twitter.user_timeline(client.info["screen_name"]).third.text %><br />
-
-<form id="twitter" action="/twitter_post">
-	<textarea name="twitter_post" maxlength="140"></textarea>
-	<input type="submit" value="Post">
-</form>
-
-<% else %>
-	<p>Register Your account on Twitter!</p>
-	<form id="twitter" action="/register">
-		<input type="submit" value="Register">
-	</form>
-<% end %>
-
-<% if @user.linkedin_authd?(@user) %>
-	<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
-  <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
-  
-  <h3>Linked In Profile</h3>
-	<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
-	<%= linkedin_client.profile.headline %><br />
-	<%= linkedin_client.profile.industry %><br />
-	
-	<%= linkedin_client.profile.summary %><br />
-	Connections: <%= linkedin_client.connections.count %>
-
-<% else %>
-	<p>Register Your account on LinkedIn!</p>
-	<form id="twitter" action="/linkedin_register">
-		<input type="submit" value="Register">
-	</form>
-<% end %>
-
-<% if @user.facebook_authd?(@user) %>
-	<% facebook_client = FacebookOAuth::Client.new(
-      :application_id => '129898603745111',
-      :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-      :token => @user.facebook_access
-  )%>
-
-<h3>Facebook Profile</h3>
-<%= facebook_client.me.info['name'] %><br />
-<%= facebook_client.me.info['link'] %><br />
-
-<%= facebook_client.me.info['about'] %><br />
-
-<% else %>
-	<p>Register Your account on Facebook!</p>
-	<form id="twitter" action="/facebook_register">
-		<input type="submit" value="Register">
-	</form>
-<% end %>
-
-<% end %>

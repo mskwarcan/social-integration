@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   
   def logout
     session[:user] = nil
-    redirect_to ("/home/index")
+    redirect_to ("/")
   end
   
   def authenticate
@@ -98,9 +98,14 @@ class UsersController < ApplicationController
     else
       flash[:login] = "Incorrect Username or Password"
       respond_to do |format|
-        format.html { render "/home/index" }
+        format.html { render "/" }
         format.xml  { head :ok }
       end
     end
   end
+  
+  def profile
+    
+  end
+  
 end
