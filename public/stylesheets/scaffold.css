@@ -120,6 +120,7 @@ div.field, div.actions {
   margin:0;
   padding:5px 0;
   text-align:right;
+  float:right;
 }
 
 .topbar ul li
