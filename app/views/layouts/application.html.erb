@@ -3,14 +3,26 @@
 <head>
   <title>Social</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "jquery.infieldlabel.min.js", "application" %>
+  <%= javascript_include_tag "jquery", "jquery.infieldlabel.min.js", "jquery.validate.min.js", "application" %>
   <%= csrf_meta_tag %>
 	<script type="text/javascript" src="http://use.typekit.com/trl2zad.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
 
-<div id="wrapper">
+<% if session[:user] %>
+	<div class="topbar">
+		<div class="wrapper2">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">My Account</a></li>
+				<li><a href="/logout">Logout</a></li>
+			</ul>
+		</div>
+	</div>
+<% end %>
+
+<div class="wrapper">
 	<%= yield %>
 </div>
 

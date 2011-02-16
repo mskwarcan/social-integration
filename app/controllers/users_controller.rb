@@ -96,7 +96,11 @@ class UsersController < ApplicationController
         format.xml  { head :ok }
       end
     else
-      flash[:notice] = "Incorrect Password"
+      flash[:login] = "Incorrect Username or Password"
+      respond_to do |format|
+        format.html { render "/home/index" }
+        format.xml  { head :ok }
+      end
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215163023) do
+ActiveRecord::Schema.define(:version => 20110216195822) do
 
   create_table "sessions", :force => true do |t|
     t.string    "session_id", :null => false
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 20110215163023) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "tweets", :force => true do |t|
-    t.string   "content"
-    t.datetime "created"
+    t.string    "content"
+    t.timestamp "created"
   end
 
   create_table "users", :force => true do |t|
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(:version => 20110215163023) do
     t.timestamp "updated_at"
     t.string    "linkedin_token"
     t.string    "linkedin_secret"
+    t.string    "facebook_access"
+    t.boolean   "facebook_authenticated"
+    t.boolean   "twitter_authenticated"
+    t.boolean   "linkedin_authenticated"
+    t.string    "email"
   end
 
 end

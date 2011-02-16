@@ -1,0 +1,41 @@
+<% @new_user = User.new %>
+
+<h3>Create An Account</h3>
+
+<%= form_for(@new_user) do |f| %>
+  <% if @new_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@new_user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @new_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :username %>
+    <%= f.text_field :username, :id => "user_username", :class => "required" %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password, :id => "user_password", :class => "required" %>
+  </p>
+  <p>
+    <label for="verify">Verify Password</label>
+    <input name="verify" id="verify" class="required" type="password" />
+  </p>
+  <p>
+    <%= f.label :name, "Your Name" %>
+    <%= f.text_field :name, :id => "user_name", :class => "required" %>
+  </p>
+  <p>
+    <%= f.label :email, "Your Email" %>
+    <%= f.text_field :email, :id => "user_email", :class => "required email" %>
+  </p>
+  <p>
+    <%= f.submit :class => "submit" %>
+  </p>
+<% end %>

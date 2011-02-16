@@ -1,0 +1,23 @@
+	<div class="login">
+		<h3>Login</h3>
+		<form id="login" method="post" action="/login">
+			<% if flash[:login]%>
+				<div class="error"><%= flash[:login] %></div>
+			<% end %>
+			<p><label for="username">Username</label>
+			<input name="username" id="username" class="required" type="text" /></p>
+			<p><label for="password">Password</label>
+			<input name="password" id="password" class="required" type="password" /></p>
+			<input class="submit" type="submit" value="Login" />
+		</form>
+		<a class="forgot" href="#">Forgot your Password?</a>
+	</div>
+	
+	<div class="account">
+		<h3>Don't have an Account?</h3>
+		<a class="create" href="/users/new">Create Account</a>
+	</div>
+	
+	<div class="hide new">
+		<%= render :partial => "/shared/new" %>
+	</div>

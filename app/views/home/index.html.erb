@@ -1,35 +1,20 @@
 
 <div class="col1">
 	<h1 class="quinect">Quinect.me Connecting Quickly</h1>
-	<div class="login">
-		<h3>Login</h3>
-		<form id="login" method="post" action="/users/authenticate">
-			<p><label for="username">Username</label>
-			<input name="username" id="username" type="text" /></p>
-			<p><label for="password">Password</label>
-			<input name="password" id="password" type="password" /></p>
-			<input class="submit" type="submit" />
-		</form>
-	</div>
+	<% if session[:user] %>
 	
-	<h3>Don't have an Account?</h3>
-	<a class="create" href="/users/new">Create Account</a>
+	<% else %>
+		<%= render :partial => "/shared/login" %>
+	<% end %>
 </div>
-
 <div class="col2">
-	<p>Quinect.me is a free web application that allows you to simutaneously change Twitter, Facebook, and Linked In profiles. It allows you to post tweets, view tweets, post status updates, view you news feed and more just from one easy location.</p>
-	<h3 class="news">Quinect.me News</h3>
-	<b>Quinect.me has arrived!</b>
-	<p>Twitter, facebook, and linked in are now available!
-	I’ll be doing my best to continue to make updates
-	that will allow you to customize the experience.</p>
+	<%= render :partial => "/shared/news" %>
 </div>
 
 <div class="col3">
-	<img src="/images/twitter.jpg" />
-	<img src="/images/facebook.jpg" />
-	<img src="/images/linkedin.jpg" />
+	<%= render :partial => "/shared/images" %>
 </div>
+
 <% if session[:user] %>
  Hello	<%= session[:user].name %>!<br />
 

@@ -5,7 +5,7 @@ Social::Application.routes.draw do
   
   get "home/index"
   
-  match 'users/authenticate' => 'users#authenticate'
+  match 'login' => 'users#authenticate'
 
   match 'logout', :controller => 'users', :action => 'logout'
   match '/register', :controller => 'home', :action => 'register'
