@@ -9,10 +9,10 @@
 			<b>Followers:</b> <%= client.info["followers_count"] %>
 		
 		<h3>You Recent Tweets</h3>	
-		<% tweets = Twitter.home_timeline(client.info["screen_name"]) %>
+		<% tweets = client.home_timeline() %>
 		<ul class="tweets">
 		<% tweets.each do | tweet |%>
-			<li>Created at: <%= tweet.created_at %> by <%= tweet.user.screen_name %><br />
+			<li><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> Created at: <%= tweet["created_at"] %> by <a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a><br />
 			<%= tweet.text %></li>
 		<% end %>
 		<ul>
