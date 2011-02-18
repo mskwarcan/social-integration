@@ -48,6 +48,11 @@ a
   text-decoration:none;
 }
 
+.notop
+{
+  margin-top:0;
+}
+
 div.field, div.actions {
   margin-bottom: 10px;
 }
@@ -302,4 +307,35 @@ label.error
   font-size:11px;
   top:31px;
   font-family:Arial;
+}
+
+/* Twitter Styles */
+img.twitter
+{
+  float:left;
+  border:4px solid #faf4e7;
+  margin-right:6px;
+}
+
+.info
+{
+  margin:10px;
+  clear:left;
+}
+
+ul.tweets
+{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+ul.tweets li
+{
+  padding:10px;
+}
+
+ul.tweets li:nth-child(2n)
+{
+  background:url('/images/white_bg.png');
 }
