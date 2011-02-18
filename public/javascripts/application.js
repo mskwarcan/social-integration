@@ -7,7 +7,15 @@ $(document).ready(function(){
         // Animation complete.
         $('.new').fadeIn('fast');
       });
-    return false
+    return false;
+  });
+  
+  $('.reply').click(function() {
+    $(this).fadeOut('fast', function() {
+        // Animation complete.
+        $(this).siblings('.reply_hide').fadeIn('fast');
+      });
+    return false;
   });
   
   $("#login").validate();

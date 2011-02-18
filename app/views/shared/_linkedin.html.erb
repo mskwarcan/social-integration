@@ -1,0 +1,17 @@
+<% if @user.linkedin_authd?(@user) %>
+	<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
+  <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
+
+  <h2 class="notop">Linked In Profile</h2>
+	<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
+	<%= linkedin_client.profile.headline %><br />
+	<%= linkedin_client.profile.industry %><br />
+
+	<%= linkedin_client.profile.summary %><br />
+	Connections: <%= linkedin_client.connections.count %>
+
+<% else %>
+	<img src="/images/linkedin.jpg" />
+	<h2>Register Your account on LinkedIn!</h2>
+	<a href="/linkedin_register" class="register">Register on LinkedIn</a>
+<% end %>

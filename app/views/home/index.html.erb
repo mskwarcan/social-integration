@@ -2,60 +2,14 @@
 <div class="col1">
 	
 	<% if session[:user] %>
-		<% if @user.twitter_authd?(@user) %>
-		<h2 class="notop">Your Twitter</h2>
-			<% client = Tweet.client(@user) %>
-			<img class="twitter" src="<%= client.info["profile_image_url"] %>" /><h3><%= client.info["screen_name"] %></h3>
-			<b>Followers:</b> <%= client.info["followers_count"] %>
-		
-		<h3>You Recent Tweets</h3>	
-		<% tweets = client.home_timeline() %>
-		<ul class="tweets">
-		<% tweets.each do | tweet |%>
-			<li><img class="twitter" src="<%= tweet["user"]["profile_image_url"] %>" /> Created at: <%= tweet["created_at"] %> by <a target="_blank" href="http://twitter.com/#!/<%= tweet["user"]["screen_name"] %>"><%= tweet["user"]["screen_name"] %></a><br />
-			<%= tweet.text %></li>
-		<% end %>
-		<ul>
-
-		<form id="twitter" action="/twitter_post">
-			<textarea name="twitter_post" maxlength="140"></textarea>
-			<input type="submit" value="Post">
-		</form>
-
-		<% else %>
-			<img src="/images/twitter.jpg" />
-			<h3>Register Your account on Twitter!</h3>
-			<form id="twitter" action="/register">
-				<input type="submit" class="submit" value="Register on Twitter">
-			</form>
-		<% end %>
+		<%= render :partial => "/shared/twitter" %>
 	<% else %>
 		<%= render :partial => "/shared/login" %>
 	<% end %>
 </div>
 <div class="col2">
 	<% if session[:user] %>
-		<% if @user.facebook_authd?(@user) %>
-			<% facebook_client = FacebookOAuth::Client.new(
-		      :application_id => '129898603745111',
-		      :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-		      :token => @user.facebook_access
-		  )%>
-
-		<h2 class="notop">Facebook Profile</h2>
-		<%= facebook_client.me.info['name'] %><br />
-		<%= facebook_client.me.info['link'] %><br />
-
-		<%= facebook_client.me.info['about'] %><br />
-
-		<% else %>
-			<img src="/images/facebook.jpg" />
-			<h2>Register Your account on Facebook!</h2>
-			<form id="twitter" action="/facebook_register">
-				<input type="submit" class="submit" value="Register on Facebook">
-			</form>
-		<% end %>
-		
+		<%= render :partial => "/shared/facebook" %>
 	<% else %>
 		<%= render :partial => "/shared/news" %>
 	<% end %>
@@ -63,25 +17,7 @@
 
 <div class="col3">
 	<% if session[:user] %>
-		<% if @user.linkedin_authd?(@user) %>
-			<% linkedin_client = LinkedIn::Client.new('wOR3wSa1SAucusiKkqC3eWVssnYUmBVs08sIETQXaMZVMIxllhTrt3SZGS9Q388P', 'uwDYLi9ELvDdptSmHIDzfDD7HOHEXm0HDK2lcn4QUIzCh3gcs5nZHpS6EFU97i47') %>
-		  <% linkedin_client.authorize_from_access(@user.linkedin_token, @user.linkedin_secret)%>
-
-		  <h2 class="notop">Linked In Profile</h2>
-			<%= linkedin_client.profile.first_name %> <%= linkedin_client.profile.last_name %><br />
-			<%= linkedin_client.profile.headline %><br />
-			<%= linkedin_client.profile.industry %><br />
-
-			<%= linkedin_client.profile.summary %><br />
-			Connections: <%= linkedin_client.connections.count %>
-
-		<% else %>
-			<img src="/images/linkedin.jpg" />
-			<h2>Register Your account on LinkedIn!</h2>
-			<form id="twitter" action="/linkedin_register">
-				<input type="submit" value="Register on Linked In">
-			</form>
-		<% end %>
+		<%= render :partial => "/shared/linkedin" %>
 	<% else %>
 		<%= render :partial => "/shared/images" %>
 	<% end %>

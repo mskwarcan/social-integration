@@ -115,5 +115,18 @@ class HomeController < ApplicationController
      
      redirect_to "/"
    end
+   
+  def facebook_post
+    @user = session[:user]
+   
+    facebook_client = FacebookOAuth::Client.new(
+        :application_id => '129898603745111',
+        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+        :token => @user.facebook_access
+    )
+    
+   facebook_client.me.feed(:create, :message => params[:facebook_post])
+   redirect_to "/"
+  end
 
 end
