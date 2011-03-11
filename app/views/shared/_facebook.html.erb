@@ -2,16 +2,14 @@
 	<% facebook = User.facebook(@user) %>
 
 <h2 class="notop">Facebook Profile</h2>
-<img class="twitter" src="<%= facebook.selection.me.picture %>" />
-<h3><%= facebook.selection.me.info!['name'] %></h3>
-<% if facebook.selection.me.info!["location"] %>
-	<%= facebook.selection.me.info!["location"]['name'] %><br />
+<h3><%= facebook.get_object("me")["name"] %></h3>
+<% if facebook.get_object("me")["location"] %>
+	<%= facebook.get_object("me")["location"]['name'] %><br />
 <% end %>
 
-Friends: <%= facebook.selection.me.friends.info!["data"].count %><br />
-<a target="_blank" href="<%= facebook.selection.me.info!['link'] %>">View Profile</a><br />
-<% feed = facebook.selection.me.home.info! %>
-<% news = feed["data"]%>
+Friends: <%= facebook.get_connections("me","friends").count %><br />
+<a target="_blank" href="<%= facebook.get_object("me")['link'] %>">View Profile</a><br />
+<% feed = facebook.get_connections("me","feed") %>
 
 <h3>Status Update</h3>
 <form id="facebook" action="/facebook_post">
@@ -20,7 +18,7 @@ Friends: <%= facebook.selection.me.friends.info!["data"].count %><br />
 </form>
 <h3>Your News Feed</h3>
 <ul class="facebook">
-<% news.each do | status |%>
+<% feed.each do | status |%>
 	<li class="clearfix"><b><%= status["from"]["name"] %></b><br />
 		<p><%= status["message"] %>
 			<% if status["link"] %>

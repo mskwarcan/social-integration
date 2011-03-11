@@ -12,26 +12,18 @@ class HomeController < ApplicationController
   def facebook_register
     @user = session[:user]
     
-    client = FacebookOAuth::Client.new(
-        :application_id => '129898603745111',
-        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-        :callback => 'http://quinect.me/facebook_oauth'
-    )
+    client = Koala::Facebook::OAuth.new('129898603745111','f4a68ca5d87865292897f00b69e8f299','http://quinect.me/facebook_oauth')
     
-    redirect_to client.authorize_url
+    redirect_to client.url_for_oauth_code
+    
   end
   
   def facebook_oauth
     @user = session[:user]
     
-    client = FacebookOAuth::Client.new(
-        :application_id => '129898603745111',
-        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-        :callback => 'http://quinect.me/facebook_oauth'
-    )
+    client = Koala::Facebook::OAuth.new('129898603745111','f4a68ca5d87865292897f00b69e8f299','http://quinect.me/facebook_oauth')
     
-    access_token = client.authorize(:code => params[:code])
-    @user.facebook_access = access_token.token
+    @user.facebook_access = client.get_access_token(code)
     @user.facebook_authenticated = true
     @user.save
     
