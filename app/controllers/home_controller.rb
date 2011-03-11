@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   require "rubygems"
   require 'twitter_oauth'
+  require 'facebook_oauth'
   require 'linkedin'
   require 'fbgraph'
   require 'twitter'
@@ -12,18 +13,26 @@ class HomeController < ApplicationController
   def facebook_register
     @user = session[:user]
     
-    client = Koala::Facebook::OAuth.new('129898603745111','f4a68ca5d87865292897f00b69e8f299','http://quinect.me/facebook_oauth')
+    client = FacebookOAuth::Client.new(
+        :application_id => '129898603745111',
+        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+        :callback => 'http://quinect.me/facebook_oauth'
+    )
     
-    redirect_to client.url_for_oauth_code
-    
+    redirect_to client.authorize_url
   end
   
   def facebook_oauth
     @user = session[:user]
     
-    client = Koala::Facebook::OAuth.new('129898603745111','f4a68ca5d87865292897f00b69e8f299','http://quinect.me/facebook_oauth')
+    client = FacebookOAuth::Client.new(
+        :application_id => '129898603745111',
+        :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
+        :callback => 'http://quinect.me/facebook_oauth'
+    )
     
-    @user.facebook_access = client.get_access_token(code)
+    access_token = client.authorize(:code => params[:code])
+    @user.facebook_access = access_token.token
     @user.facebook_authenticated = true
     @user.save
     

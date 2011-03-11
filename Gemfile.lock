@@ -34,6 +34,10 @@ GEM
     crack (0.1.8)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    facebook_oauth (0.2.2)
+      json (>= 1.1.9)
+      mime-types (>= 1.16)
+      oauth2 (>= 0.0.8)
     faraday (0.5.5)
       addressable (~> 2.2.4)
       multipart-post (~> 1.1.0)
@@ -126,6 +130,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  facebook_oauth
   fbgraph
   koala
   linkedin

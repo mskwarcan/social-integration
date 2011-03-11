@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   
    def self.facebook(user)
      client = Koala::Facebook::OAuth.new('129898603745111','f4a68ca5d87865292897f00b69e8f299','http://quinect.me/facebook_oauth')
-     Koala::Facebook::GraphAPI.new(client.get_app_access_token)
+
+     Koala::Facebook::GraphAPI.new(user.facebook_access)
   end
 end
