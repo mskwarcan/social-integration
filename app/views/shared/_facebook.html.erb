@@ -1,17 +1,16 @@
 <% if @user.facebook_authd?(@user) %>
-	<% facebook_client = FacebookOAuth::Client.new(
-      :application_id => '129898603745111',
-      :application_secret => 'f4a68ca5d87865292897f00b69e8f299',
-      :token => @user.facebook_access
-  )%>
+	<% facebook = User.facebook(@user) %>
 
 <h2 class="notop">Facebook Profile</h2>
-<h3><%= facebook_client.me.info['name'] %></h3>
-<% if facebook_client.me.info["location"] %>
-	<%= facebook_client.me.info["location"]['name'] %>
+<img class="twitter" src="<%= facebook.selection.me.picture %>" />
+<h3><%= facebook.selection.me.info!['name'] %></h3>
+<% if facebook.selection.me.info!["location"] %>
+	<%= facebook.selection.me.info!["location"]['name'] %><br />
 <% end %>
-<a target="_blank" href="<%= facebook_client.me.info['link'] %>">View Profile</a><br />
-<% feed = facebook_client.me.home %>
+
+Friends: <%= facebook.selection.me.friends.info!["data"].count %><br />
+<a target="_blank" href="<%= facebook.selection.me.info!['link'] %>">View Profile</a><br />
+<% feed = facebook.selection.me.home.info! %>
 <% news = feed["data"]%>
 
 <h3>Status Update</h3>
@@ -22,13 +21,13 @@
 <h3>Your News Feed</h3>
 <ul class="facebook">
 <% news.each do | status |%>
-	<li><img src="<%= status["icon"] %>" /><b><%= status["from"]["name"] %></b><br />
-		<%= status["message"] %>
+	<li class="clearfix"><b><%= status["from"]["name"] %></b><br />
+		<p><%= status["message"] %>
 			<% if status["link"] %>
 				<a href="<%= status["link"] %>">link</a>
-			<% end %>
+			<% end %></p>
 		<% if status["picture"] %>
-			<img src="<%= status["picture"] %>" />
+			<img class="facebook_pic" src="<%= status["picture"] %>" />
 			<%= status["caption"] %>
 			<%= status["description"] %>
 		<% end %>

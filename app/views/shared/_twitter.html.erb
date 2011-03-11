@@ -10,7 +10,7 @@
 	<input type="submit" class="post" value="Post">
 </form>
 
-<h3>You Recent Tweets</h3>	
+<h3>Your Recent Tweets</h3>	
 <% tweets = client.home_timeline() %>
 <ul class="tweets">
 <% tweets.each do | tweet |%>
@@ -24,7 +24,7 @@
 	</form>
 	</div></li>
 <% end %>
-<ul>
+</ul>
 
 <% else %>
 	<img src="/images/twitter.jpg" />

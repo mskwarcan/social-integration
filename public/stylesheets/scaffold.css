@@ -48,6 +48,11 @@ a
   text-decoration:none;
 }
 
+img
+{
+  border:none;
+}
+
 .notop
 {
   margin-top:0;
@@ -113,7 +118,7 @@ div.field, div.actions {
 
 .topbar
 {
-  padding:5px;
+  padding:5px 0;
   height:30px;
   background:url('/images/white_bg.png');
   width:100%;
@@ -315,6 +320,7 @@ img.twitter
   float:left;
   border:4px solid #faf4e7;
   margin-right:6px;
+  width:48px;
 }
 
 .info
@@ -388,4 +394,39 @@ ul.facebook li
 ul.facebook li:nth-child(2n)
 {
   background:url('/images/black_bg.png');
+}
+
+ul.facebook p
+{
+  font-size:13px;
+  line-height:1.3;
+}
+
+.facebook_pic
+{
+  float:left;
+  border:4px solid #ecdcbd;
+  margin:0 8px 8px 0;
+}
+
+/* clearfix */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
 }
