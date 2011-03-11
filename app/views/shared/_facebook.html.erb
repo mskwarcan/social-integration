@@ -9,7 +9,7 @@
 
 Friends: <%= facebook.get_connections("me","friends").count %><br />
 <a target="_blank" href="<%= facebook.get_object("me")['link'] %>">View Profile</a><br />
-<% feed = facebook.get_connections("me","feed") %>
+<% feed = facebook.get_connections("me","home") %>
 
 <h3>Status Update</h3>
 <form id="facebook" action="/facebook_post">
